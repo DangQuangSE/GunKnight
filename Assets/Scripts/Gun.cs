@@ -2,16 +2,21 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    private float rotateOffset = 180f;  
+    private float rotateOffset = 180f;
+    [SerializeField] private Transform FirePos;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float shootDeplay = 0.15f;
+    private float nextShoot;
+    [SerializeField] private int maxAmmo = 10;
+    public int currentAmmo;
     void Start()
     {
-        
+        currentAmmo = maxAmmo;
     }
-
-
     void Update()
     {
         RotateGun();
+        Shoot();
     }
     void RotateGun()
     {
@@ -29,6 +34,15 @@ public class Gun : MonoBehaviour
         else
         {
             transform.localScale = new Vector3(1, -1, 1);
+        }
+    }
+    void Shoot()
+    {
+        if(Input.GetMouseButton(0) && Time.time > nextShoot && currentAmmo > 0)
+        {
+            nextShoot = Time.time + shootDeplay;
+            Instantiate(bulletPrefab, FirePos.position, FirePos.rotation);
+            currentAmmo--;
         }
     }
 }
