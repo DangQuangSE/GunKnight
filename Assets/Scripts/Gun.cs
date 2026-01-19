@@ -7,7 +7,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float shootDeplay = 0.15f;
     private float nextShoot;
-    [SerializeField] private int maxAmmo = 10;
+    [SerializeField] private int maxAmmo = 24;
     public int currentAmmo;
     void Start()
     {
@@ -17,6 +17,8 @@ public class Gun : MonoBehaviour
     {
         RotateGun();
         Shoot();
+        Shoot();
+        ReloadAmmo();
     }
     void RotateGun()
     {
@@ -38,11 +40,18 @@ public class Gun : MonoBehaviour
     }
     void Shoot()
     {
-        if(Input.GetMouseButton(0) && Time.time > nextShoot && currentAmmo > 0)
+        if(Input.GetMouseButtonDown(0) && Time.time > nextShoot && currentAmmo > 0)
         {
             nextShoot = Time.time + shootDeplay;
             Instantiate(bulletPrefab, FirePos.position, FirePos.rotation);
             currentAmmo--;
+        }
+    }
+    void ReloadAmmo()
+    {
+        if(Input.GetMouseButtonDown(1) && currentAmmo < maxAmmo)
+        {
+            currentAmmo = maxAmmo;
         }
     }
 }
