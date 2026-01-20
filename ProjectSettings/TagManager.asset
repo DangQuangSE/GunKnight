@@ -42,6 +42,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Round
+    uniqueID: 3235367777
+    locked: 0
+  - name: Grass
+    uniqueID: 3521581771
+    locked: 0
+  - name: Rock
+    uniqueID: 805224243
+    locked: 0
+  - name: Tree
+    uniqueID: 2520121811
+    locked: 0
   - name: Player
     uniqueID: 2044849437
     locked: 0
