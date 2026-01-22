@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -7,11 +8,20 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 playerInput;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    [SerializeField] protected float maxHp = 100f;
+    [SerializeField] private Image hpBar;
+    protected float currentHP;
+    private void Start()
+    {
+        currentHP = maxHp;
+        UpdateHPBar();
+    }
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
     }
     void Update()
     {
@@ -22,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         PlayerMove();
-        
+
     }
     private void PlayerMove()
     {
@@ -45,5 +55,26 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("IsRunning", false);
         }
+    }
+    public void TakeDame(float damage)
+    {
+        UpdateHPBar();
+        currentHP -= damage;
+        currentHP = Mathf.Max(currentHP, 0);
+        if (currentHP <= 0)
+        {
+            Die();
+        }
+    }
+    public void UpdateHPBar()
+    {
+        if (hpBar != null)
+        {
+            hpBar.fillAmount = currentHP / maxHp;
+        }
+    }
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 }
