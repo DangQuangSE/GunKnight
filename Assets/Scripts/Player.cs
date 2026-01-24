@@ -58,8 +58,8 @@ public class Player : MonoBehaviour
     }
     public void TakeDame(float damage)
     {
-        UpdateHPBar();
         currentHP -= damage;
+        UpdateHPBar();
         currentHP = Mathf.Max(currentHP, 0);
         if (currentHP <= 0)
         {
@@ -81,6 +81,7 @@ public class Player : MonoBehaviour
     {
         if (currentHP < maxHp)
         {
+            Debug.Log("Healing Player" + healValue);
             currentHP += healValue;
             currentHP = Mathf.Min(currentHP, maxHp);
             UpdateHPBar();

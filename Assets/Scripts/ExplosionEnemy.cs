@@ -3,7 +3,6 @@ using UnityEngine;
 public class ExplosionEnemy : Enemies
 {
     [SerializeField] private GameObject explosionEffect;
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
