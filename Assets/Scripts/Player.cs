@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
     private Rigidbody2D rb;
@@ -76,5 +76,14 @@ public class PlayerMovement : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+    }
+    public void Heal(float healValue)
+    {
+        if (currentHP < maxHp)
+        {
+            currentHP += healValue;
+            currentHP = Mathf.Min(currentHP, maxHp);
+            UpdateHPBar();
+        }
     }
 }
